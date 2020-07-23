@@ -17,8 +17,8 @@
  * Define Global Variables
  * 
 */
-var sections = document.querySelectorAll('section');
-var fragment = document.createDocumentFragment();
+const sections = document.querySelectorAll('section');
+const fragment = document.createDocumentFragment();
 
 /**
  * End Global Variables
@@ -26,9 +26,10 @@ var fragment = document.createDocumentFragment();
  * 
 */
 
+// checks if the section is in the viewpoint
 function elementInViewport(section) 
 {
-    var bounding = section.getBoundingClientRect();
+    const bounding = section.getBoundingClientRect();
 
     if (bounding.top >= 0 && bounding.left >= 0 && bounding.right <= (window.innerWidth || document.documentElement.clientWidth) && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)) 
     {
@@ -50,15 +51,15 @@ function elementInViewport(section)
 // build the nav
 
     
-for (var i = 0; i < sections.length; i++) 
+for (let i = 0; i < sections.length; i++) 
 {
-    var newElement = document.createElement('li');
-    var newAnchor = document.createElement('a');
+    const newElement = document.createElement('li');
+    const newAnchor = document.createElement('a');
     newAnchor.innerText = sections[i].getAttribute('data-nav');
     newAnchor.setAttribute('href',"#" +sections[i].getAttribute('id'));
     newAnchor.id = "navEl"+(i+1);
     newAnchor.setAttribute('class', "menu__link");
-    newAnchor.addEventListener('click',function scrollDown(event)
+    newAnchor.addEventListener('click', function scrollDown(event)
     {
         event.preventDefault();
         document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -71,9 +72,9 @@ document.querySelector('ul#navbar__list').appendChild(fragment);
 
 
 //======================================================================
-
+// Add active state when a section is in the viewport
 document.addEventListener('scroll',function(){
-    for(var i=0;i<sections.length;i++)
+    for(let i=0;i<sections.length;i++)
     {
         if(!elementInViewport(sections[i]))
         {
